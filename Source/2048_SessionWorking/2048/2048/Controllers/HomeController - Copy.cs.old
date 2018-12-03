@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using _2048.BisnessLogic;
+using _2048.Models;
+
+namespace _2048.Controllers
+{
+    public class HomeController : Controller
+    {
+        public static int[,] matrix = new int[4, 4];
+        public static int state = 0;
+        public ActionResult Index()
+        {
+            Game game = new Game();
+            if (state == 0 )
+            {
+                game.matrix = Logic.InitializeMatrix();
+                state = 1;
+            }
+            else
+            {
+                Array.Copy(Logic.matrix, 0, game.matrix, 0, Logic.matrix.Length);
+
+                //  copy static matrix in game.matrix
+            }
+
+            return View(game);
+        }
+        [HttpPost]
+        public ActionResult Index(string submit)
+        {
+            switch (submit)
+            {
+                case "Up":
+                    _2048.BisnessLogic.Logic.MoveUp();
+                    break;
+                case "Down":
+                    _2048.BisnessLogic.Logic.MoveDown();
+                    break;
+                    //case ConsoleKey.LeftArrow:
+                    //break;
+                    //case ConsoleKey.RightArrow:
+                    // MoveUp();
+                    //break;
+                
+            }
+            return RedirectToAction("Index");
+        }
+    }
+}

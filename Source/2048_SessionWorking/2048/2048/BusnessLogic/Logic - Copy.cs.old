@@ -1,0 +1,168 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using System.Web;
+
+namespace _2048.BisnessLogic
+{
+    public class Logic
+    {
+        public static Random rand = new Random();
+        public static int[,] matrix = new int[4, 4];
+
+        public static int[,] InitializeMatrix()
+        {
+            //for (int x = 0; x < matrix.GetLength(0); x++)
+            //{
+            //    for (int y = 0; y < matrix.GetLength(1); y++)
+            //    {
+            //        matrix[x, y] = 0;
+            //    }
+            //}
+            int a1 = rand.Next(0, matrix.GetLength(0));
+            int a2 = rand.Next(0, matrix.GetLength(1));
+
+            int b1 = rand.Next(0, matrix.GetLength(0));
+            int b2 = rand.Next(0, matrix.GetLength(1));
+
+
+            if (a1 == b1 && a2 == b2)
+            {
+                while (a1 == b1 && a2 == b2)
+                {
+                    b1 = rand.Next(0, matrix.GetLength(0));
+                    b2 = rand.Next(0, matrix.GetLength(1));
+                }
+            }
+            int randomValue1 = GenerateNumber();
+            int randomValue2 = GenerateNumber();
+
+            matrix[a1, a2] = randomValue1;
+            matrix[b1, b2] = randomValue2;
+
+            for (int x = 0; x < 4; x++)
+            {
+                for (int y = 0; y < 4; y++)
+                {
+                    if (matrix[x, y] != 0)
+                    {
+                        Console.Write(" " + matrix[x, y] + " ");
+                    }
+                }
+            }
+
+            return matrix;
+        }
+
+        public static int GenerateNumber()
+        {
+            int number = rand.Next(100);
+            int equals;
+            bool bigger = false;
+            if (number > 20)
+            {
+                bigger = true;
+            }
+            else
+            {
+                bigger = false;
+            }
+
+            equals = (bigger) ? 2 : 4; //80 % is 2 , 20% is 4
+
+            return equals;
+        }
+
+        public static void CheckEmpty()
+        {
+            int x = rand.Next(0, matrix.GetLength(0));
+            int y = rand.Next(0, matrix.GetLength(1));
+            if (matrix[x, y] == 0)
+            {
+                matrix[x, y] = GenerateNumber();
+            }
+            else
+            {
+                try
+                {
+                    CheckEmpty();
+                }
+                catch (StackOverflowException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+        }
+
+        public static void Test()
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    if (matrix[i, j] != 0)
+                    {
+                        Console.Write(" " + matrix[i, j] + " ");
+                    }
+                }
+            }
+        }
+
+        public static void MoveDown()
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    while ((matrix[i + 1, j] == 0) && (matrix[i, j] != 0))
+                    {
+                        matrix[i + 1, j] = matrix[i, j];
+                        matrix[i, j] = 0;
+                    }
+                    if (matrix[i + 1, j] == matrix[i, j])
+                    {
+                        matrix[i + 1, j] = matrix[i, j] * 2;
+                        matrix[i, j] = 0;
+                        i = i + 1;
+                        if (i == matrix.GetLength(0) - 2 && matrix[matrix.GetLength(0) - 1, j] == 0)
+                        {
+                            matrix[matrix.GetLength(0) - 1, j] = matrix[i + 1, j];
+                            matrix[i + 1, j] = 0;
+                        }
+                    }
+                }
+            }
+            CheckEmpty();
+            Test();
+        }
+
+        public static void MoveUp()
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                for (int i = matrix.GetLength(0) - 1; i > 0; i--)
+                {
+                    while ((matrix[i - 1, j] == 0) && (matrix[i, j] != 0))
+                    {
+                        matrix[i - 1, j] = matrix[i, j];
+                        matrix[i, j] = 0;
+                    }
+                    if (matrix[i - 1, j] == matrix[i, j])
+                    {
+                        matrix[i - 1, j] = matrix[i, j] * 2;
+                        matrix[i, j] = 0;
+                        i = i - 1;
+                        if (i == 1 && matrix[0, j] == 0)
+                        {
+                            matrix[0, j] = matrix[i - 1, j];
+                            matrix[i - 1, j] = 0;
+                        }
+                    }
+                }
+            }
+            CheckEmpty();
+            Test();
+        }
+    }
+}

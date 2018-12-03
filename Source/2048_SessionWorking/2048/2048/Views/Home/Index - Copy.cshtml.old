@@ -1,0 +1,58 @@
+﻿@model _2048.Models.Game
+{
+@ViewBag.Title ="Index";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="@Url.Content("~/Content/Index.css")" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @Html.BeginForm()
+    <div class="container">
+        <div class="jumbotron container">
+            <h1>Play 2048</h1>
+            <!-- <button type="button">New Game</button> -->
+            <button type="submit" name="submit" value="New">New Game</button>
+        </div>
+
+        <div class="game-container">
+            <div class="grid-container">
+                <div class="grid-row">
+                    <div class="grid-cell">@Model.matrix[0, 0]</div>
+                    <div class="grid-cell">@Model.matrix[0, 1]</div>
+                    <div class="grid-cell">@Model.matrix[0, 2]</div>
+                    <div class="grid-cell">@Model.matrix[0, 3]</div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell">@Model.matrix[1, 0]</div>
+                    <div class="grid-cell">@Model.matrix[1, 1]</div>
+                    <div class="grid-cell">@Model.matrix[1, 2]</div>
+                    <div class="grid-cell">@Model.matrix[1, 3]</div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell">@Model.matrix[2, 0]</div>
+                    <div class="grid-cell">@Model.matrix[2, 1]</div>
+                    <div class="grid-cell">@Model.matrix[2, 2]</div>
+                    <div class="grid-cell">@Model.matrix[2, 3]</div>
+                </div>
+                <div class="grid-row">
+                    <div class="grid-cell">@Model.matrix[3, 0]</div>
+                    <div class="grid-cell">@Model.matrix[3, 1]</div>
+                    <div class="grid-cell">@Model.matrix[3, 2]</div>
+                    <div class="grid-cell">@Model.matrix[3, 3]</div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" name="submit" value="Up">Up</button>
+        <button type="submit" name="submit" value="Down">Down</button>
+        <button type="submit" name="submit" value="Right">Right</button>
+        <button type="submit" name="submit" value="Left">Left</button>
+    </div>
+</body>
+</html>
