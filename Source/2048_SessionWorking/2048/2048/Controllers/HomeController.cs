@@ -25,7 +25,7 @@ namespace _2048.Controllers
                 matrix = (int[,])HttpContext.Session["Matrix"];
             }
 
-            GameVM game = new GameVM(); //
+            GameVM game = new GameVM();
             game.Matrix = matrix;
 
             return View(game);
