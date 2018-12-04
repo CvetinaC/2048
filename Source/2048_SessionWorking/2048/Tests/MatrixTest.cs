@@ -30,10 +30,16 @@ namespace Tests
                 { 0, 2, 0, 0 },
                 { 4, 0, 0, 0 }
             };
-            int[,] actualMatrix = { { 4, 4, 0, 2 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
-            int[,] result = Logic.MoveUp(myMatrix);
+            int[,] actualMatrix = {
+                { 4, 4, 0, 2 },
+                { 0, 0, 0, 0 }, 
+                { 0, 0, 0, 0 }, 
+                { 0, 0, 0, 0 }
+            };
+            int result = Logic.MoveUp(myMatrix);
+            
 
-            CollectionAssert.AreEqual(result, actualMatrix);
+            CollectionAssert.AreEqual(myMatrix, actualMatrix);
 
         }
 
@@ -41,11 +47,23 @@ namespace Tests
         [TestMethod]
         public void MoveDownTest()
         {
-            int[,] myMatrix = { { 2, 2, 4, 4 }, { 0, 4, 2, 0 }, { 2, 0, 0, 0 }, { 0, 0, 2, 0 } };
-            int[,] actualMatrix = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 0, 2, 4, 0 }, { 4, 4, 4, 4 } };
-            int[,] result = _2048.BisnessLogic.Logic.MoveDown(myMatrix);
-
-            CollectionAssert.AreEqual(result, actualMatrix);
+            Random rand = new Random();
+            int[,] myMatrix = {
+                { 2, 2, 4, 4 },
+                { 0, 4, 2, 0 },
+                { 2, 0, 0, 0 },
+                { 0, 0, 2, 0 }
+            };
+            int[,] actualMatrix = {
+                { 0, 0, 0, 0 },
+                { 0, 0, 0, 0 },
+                { 0, 2, 4, 0 }, 
+                { 4, 4, 4, 4 }
+            };
+            int result = Logic.MoveDown(myMatrix);
+            
+            
+            CollectionAssert.AreEqual(myMatrix, actualMatrix);
 
         }
 

@@ -8,5 +8,6 @@ namespace _2048.Models
     public class GameVM
     {
         public int[,] Matrix { get; set; }
+        public int Score { get; set; }
     }
 }

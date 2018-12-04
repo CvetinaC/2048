@@ -36,17 +36,7 @@ namespace _2048.BisnessLogic
 
             matrix[a1, a2] = randomValue1;
             matrix[b1, b2] = randomValue2;
-
-            //for (int x = 0; x < 4; x++)
-            //{
-            //    for (int y = 0; y < 4; y++)
-            //    {
-            //        if (matrix[x, y] != 0)
-            //        {
-            //            Console.Write(" " + matrix[x, y] + " ");
-            //        }
-            //    }
-            //}
+            
             Logic.matrix = matrix;
             return matrix;
         }
@@ -79,7 +69,7 @@ namespace _2048.BisnessLogic
             return false;
         }
 
-        public static bool BoardUnchaned(int[,] current,int[,] changedMatrix)
+        public static bool BoardUnchanged(int[,] current,int[,] changedMatrix)
         {
             bool isEqual = true;
             for (int i = 0; i < 4; i++)
@@ -131,34 +121,7 @@ namespace _2048.BisnessLogic
             } while (matrix[x, y] != 0);
             matrix[x, y] = GenerateNumber();
         }
-
-        //public static void CheckEmpty()
-        //{
-        //    int x = rand.Next(0, matrix.GetLength(0));
-        //    int y = rand.Next(0, matrix.GetLength(1));
-        //    if (matrix[x, y] == 0)
-        //    {
-        //        matrix[x, y] = GenerateNumber();
-        //    }
-        //    else
-        //    {
-        //            int won = hasWon();
-        //            if (won == 1)
-        //            {
-        //               //message congrats
-        //            }
-        //            isOver = CheckGameOver();
-        //            if (isOver)
-        //            {
-        //                //game over
-        //            }
-        //            else //if can merge some cells
-        //            {
-        //                // CheckEmpty();
-        //            }
-        //    }
-                
-        //}
+        
 
         private static bool CheckGameOver()
         {
@@ -176,18 +139,11 @@ namespace _2048.BisnessLogic
                 for (int i = 0; i < 3; i++)
                 {
                       if (matrix[i, cols] == matrix[i + 1, cols] && matrix[i, cols] != 0)
-                        {
-                            //cols = 4; // go out 
+                      {
                             return true;
                       }
-
                 }
-                    
-                //if (cols < 4)
-                //{
-                //    CheckColumns(matrix, cols + 1);
-                //}
-            return false;
+                return false;
         }
 
         private static bool CheckRows(int[,] matrix, int row)
@@ -195,37 +151,15 @@ namespace _2048.BisnessLogic
             
                 for (int i = 0; i < 3; i++)
                 {
-                    
-                        if (matrix[row, i] == matrix[row, i + 1] && matrix[row, i] != 0)
-                        {
-                            row = 5;
-                            return true;
-                        }
+                    if (matrix[row, i] == matrix[row, i + 1] && matrix[row, i] != 0)
+                    {
+                        return true;
                     }
-                    
-                //if (row < 3)
-                //{
-                //    CheckRows(matrix, row + 1);
-                //}
-            return false;
+                } 
+                return false;
         }
-
-
-        //public static void Test()
-        //{
-        //    for (int i = 0; i < matrix.GetLength(0); i++)
-        //    {
-        //        for (int j = 0; j < matrix.GetLength(1); j++)
-        //        {
-        //            if (matrix[i, j] != 0)
-        //            {
-        //                Console.Write(" " + matrix[i, j] + " ");
-        //            }
-        //        }
-        //    }
-        //}
-
-        public static int[,] MoveDown(int[,] matrix)
+        
+        public static int MoveDown(int[,] matrix)
         {
             int[,] copyMatrix = (int[,])matrix.Clone();
             int iScore = 0;
@@ -264,37 +198,35 @@ namespace _2048.BisnessLogic
                 }
             }
             
-            if(BoardUnchaned(copyMatrix, matrix))
+            if(BoardUnchanged(copyMatrix, matrix))
             {
-                return matrix;
+                return iScore;
             }
 
             if (!CheckEmptySlots(matrix))
             {
-                return matrix;
+                return iScore;
             }
 
             if(!CheckGameOver())
             {
-                return matrix;
+                return iScore;
             }
 
             if (hasWon())
             {
-                return matrix;
+                return iScore;
             }
 
             PutNewNumberOnBoard(matrix);
-
-            // CheckEmpty();
-            //Test();
-            score += iScore;
-            return matrix;
+            
+            //score += iScore;
+            return iScore;
         }
 
 
 
-        public static int[,] MoveUp(int[,] matrix)
+        public static int MoveUp(int[,] matrix)
         {
             int[,] copyMatrix = (int[,])matrix.Clone();
             int iScore = 0;
@@ -332,34 +264,33 @@ namespace _2048.BisnessLogic
                     }
                 }
             }
-            if (BoardUnchaned(copyMatrix, matrix))
+            if (BoardUnchanged(copyMatrix, matrix))
             {
-                return matrix;
+                return iScore;
             }
 
             if (!CheckEmptySlots(matrix))
             {
-                return matrix;
+                return iScore;
             }
 
             if (!CheckGameOver())
             {
-                return matrix;
+                return iScore;
             }
 
             if (hasWon())
             {
-                return matrix;
+                return iScore;
             }
 
             PutNewNumberOnBoard(matrix);
-            //CheckEmpty();
-            //Test();
-            score += iScore;
-            return matrix;
+            
+            //score += iScore;
+            return iScore;
         }
 
-        public static int[,] MoveLeft(int[,] matrix)
+        public static int MoveLeft(int[,] matrix)
         {
             int[,] copyMatrix = (int[,])matrix.Clone();
             int iScore = 0;
@@ -397,34 +328,33 @@ namespace _2048.BisnessLogic
                     }
                 }
             }
-            if (BoardUnchaned(copyMatrix, matrix))
+            if (BoardUnchanged(copyMatrix, matrix))
             {
-                return matrix;
+                return iScore;
             }
 
             if (!CheckEmptySlots(matrix))
             {
-                return matrix;
+                return iScore;
             }
 
             if (!CheckGameOver())
             {
-                return matrix;
+                return iScore;
             }
 
             if (hasWon())
             {
-                return matrix;
+                return iScore;
             }
 
             PutNewNumberOnBoard(matrix);
-            // CheckEmpty();
-            //Test();
-            score += iScore;
-            return matrix;
+           
+            //score += iScore;
+            return iScore;
         }
 
-        public static int[,] MoveRight(int[,] matrix)
+        public static int MoveRight(int[,] matrix)
         {
             int[,] copyMatrix = (int[,])matrix.Clone();
             int iScore = 0;
@@ -462,31 +392,30 @@ namespace _2048.BisnessLogic
                     }
                 }
             }
-            if (BoardUnchaned(copyMatrix, matrix))
+            if (BoardUnchanged(copyMatrix, matrix))
             {
-                return matrix;
+                return iScore;
             }
 
             if (!CheckEmptySlots(matrix))
             {
-                return matrix;
+                return iScore;
             }
 
             if (!CheckGameOver())
             {
-                return matrix;
+                return iScore;
             }
 
             if (hasWon())
             {
-                return matrix;
+                return iScore;
             }
 
             PutNewNumberOnBoard(matrix);
-            //CheckEmpty();
-            //Test();
-            score += iScore;
-            return matrix;
+            
+            //score += iScore;
+            return iScore;
         }
     }
 }
