@@ -18,6 +18,8 @@
             getMatrix(4);
             //alert("Left");
         }
+
+       // ChangeScore();
     }
 
 
@@ -41,11 +43,12 @@
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var responseText = xmlhttp.responseText;
                 var responseXML = xmlhttp.responseXML;
-                var matrix = JSON.parse(responseText);
-
+                var game = JSON.parse(responseText);
+                var matrix = game.Matrix;
                 //var element = document.getElementById("cell_0_0");
                 //element.innerHTML = matrix[0][0];
 
+                
                 for (var i = 0; i < 4; i++) {
                     for (var j = 0; j < 4; j++) {
 
@@ -60,10 +63,27 @@
                     }
                 }
                 //alert(matrix[0][0]);
+
+                score = document.getElementById("score");
+                score.innerHTML = "Score:" + game.Score;
+
+                result = document.getElementById("result");
+                result.innerHTML = "Max Result:" + game.Result;
+
+                gameStatus = document.getElementById("gameStatus");
+                if (game.hasBeenWon === true) {
+                    gameStatus.innerHTML = "You Won";
+                } else if (game.isGameOver === true) {
+                    gameStatus.innerHTML = "Game Over";
+                } else {}
+
             }
         }
     }
 
     //alert("Hello World!");
+
+    
+
 
 })();

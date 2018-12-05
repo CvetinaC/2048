@@ -19,10 +19,10 @@
     <div class="container">
         <div class="jumbotron container">
             <h1>Play 2048</h1>
-            <div>Score=@Model.Score</div>
-            <div>MaxTile=@Model.Result</div>
+            <div id="score">Score=@Model.Score</div>
+            <div id="result">MaxTile=@Model.Result</div>
             <button type="submit" name="submit" value="New">New Game</button>
-            <p>@if (Model.hasBeenWon==true) { <label>You Won!</label>; } else if (Model.isGameOver==true) { <label>Game Over!</label>; }
+            <p id="gameStatus">@if (Model.hasBeenWon==true) { <label>You Won!</label>; } else if (Model.isGameOver==true) { <label>Game Over!</label>; }
             else { }
         </p>
         <div class="game-container">

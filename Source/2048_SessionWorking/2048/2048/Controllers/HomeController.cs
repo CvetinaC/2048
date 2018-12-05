@@ -12,7 +12,7 @@ namespace _2048.Controllers
     {
         public int[,] matrix = new int[4, 4];
         public int score = 0;
-        public int result = 0;
+        private static int result = 0;
         
         public ActionResult Index()
         {
@@ -38,14 +38,8 @@ namespace _2048.Controllers
             game.hasBeenWon = false;
             game.isGameOver = false;
             game.Result = result;
-            if (result > 2048 || result == 2048)
-            {
-                game.hasBeenWon = true;
-            }
-            else if (Logic.CheckEmptySlots(matrix)!=true&&Logic.CheckGameOver()==true)
-            {
-                game.isGameOver = true;
-            }
+
+            IsWon(game);
 
             return View(game);
         }
@@ -60,6 +54,7 @@ namespace _2048.Controllers
                 case "New":
                     matrix = Logic.InitializeMatrix();
                     score = 0;
+                    result = 0;
                     break;
                 case "Up":
                     score+=Logic.MoveUp(matrix);
@@ -83,6 +78,18 @@ namespace _2048.Controllers
             HttpContext.Session["Score"] = score;
             HttpContext.Session["Result"] = result;
             return RedirectToAction("Index");
+        }
+
+        public void IsWon(GameVM game)
+        {
+            if (result > 2048 || result == 2048)
+            {
+                game.hasBeenWon = true;
+            }
+            else if (Logic.CheckEmptySlots(game.Matrix) != true && Logic.CheckGameOver() == true)
+            {
+                game.isGameOver = true;
+            }
         }
     }
 }

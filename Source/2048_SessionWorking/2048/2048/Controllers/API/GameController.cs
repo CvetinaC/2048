@@ -13,63 +13,49 @@ namespace _2048.Controllers.API
 {
     public class GameController : ApiController
     {
+        int score = 0;
         [HttpGet]
-        [ResponseType(typeof(int[,]))]
+        [ResponseType(typeof(GameVM))]
         public IHttpActionResult Index(int id = 0)
         {
-            int[,] matrix = new int[4, 4];
-            int score = 0;
-            if (HttpContext.Current.Session["Matrix"] == null)
-            {
-                matrix = Logic.InitializeMatrix();
-                HttpContext.Current.Session["Matrix"] = matrix;
-                HttpContext.Current.Session["Score"] = 0;
-            }
-            else
-            {
-                matrix = (int[,])HttpContext.Current.Session["Matrix"];
-                score= (int)HttpContext.Current.Session["Score"];
-            }
+            GameVM game = new GameVM();
 
-            matrix = (int[,])HttpContext.Current.Session["Matrix"];
-            score= (int)HttpContext.Current.Session["Score"];
-            //GameVM game = new GameVM();
-            //game.Matrix = matrix;
-            //game.Score = score;
-            //game.hasBeenWon = false;
-            //game.isGameOver = false;
-            //if (score > 2048 || score == 2048)
-            //{
-            //    game.hasBeenWon = true;
-            //}
-            //else if (Logic.CheckEmptySlots(matrix) != true && Logic.CheckGameOver() == true)
-            //{
-            //    game.isGameOver = true;
-            //}
-
-
-            //matrix[0, 0] = id;
+            game.Matrix = (int[,])HttpContext.Current.Session["Matrix"];
+            game.Score= (int)HttpContext.Current.Session["Score"];
+            game.Result = (int)HttpContext.Current.Session["Result"];
+            
             switch (id)
             {
                 case 1:
-                    score += Logic.MoveUp(matrix);
+                    game.Score += Logic.MoveUp(game.Matrix);
+                    game.Result = Logic.maxResult;
                     break;
                 case 2:
-                    score += Logic.MoveRight(matrix);
+                    game.Score += Logic.MoveRight(game.Matrix);
+                    game.Result = Logic.maxResult;
                     break;
                 case 3:
-                    score += Logic.MoveDown(matrix);
+                    game.Score += Logic.MoveDown(game.Matrix);
+                    game.Result = Logic.maxResult;
                     break;
                 case 4:
-                    score += Logic.MoveLeft(matrix);
+                    game.Score += Logic.MoveLeft(game.Matrix);
+                    game.Result = Logic.maxResult;
                     break;
                 default:
                     break;
             }
 
-            HttpContext.Current.Session["Matrix"] = matrix;
-            HttpContext.Current.Session["Score"] = score;
-            return Ok(matrix);
+            HomeController home = new HomeController();
+            home.IsWon(game);
+            
+            HttpContext.Current.Session["Matrix"] = game.Matrix;
+            HttpContext.Current.Session["Score"] = game.Score;
+            return Ok(game);
         }
+
+
+        
+
     }
 }
