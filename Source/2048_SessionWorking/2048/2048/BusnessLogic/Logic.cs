@@ -10,8 +10,8 @@ namespace _2048.BisnessLogic
     {
         public static Random rand = new Random();
         public static int[,] matrix = new int[4, 4];
-        public static bool isOver = false;
         public static int score = 0;
+        public static int maxResult = 0;
 
         public static int[,] InitializeMatrix()
         {
@@ -62,9 +62,19 @@ namespace _2048.BisnessLogic
 
         public static bool hasWon()
         {
-            if (score == 2048)
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
-                return true;
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    if (matrix[i,j]  > maxResult)
+                    {
+                        maxResult = matrix[i, j];
+                        if (maxResult == 2048)
+                        {
+                            return true;
+                        }
+                    }
+                }
             }
             return false;
         }
@@ -123,10 +133,10 @@ namespace _2048.BisnessLogic
         }
         
 
-        private static bool CheckGameOver()
+        public static bool CheckGameOver()
         {
-            bool rows = CheckRows(matrix, 0);
-            bool cols = CheckColumns(matrix,0);
+            bool rows = CheckRows(matrix);
+            bool cols = CheckColumns(matrix);
             if (rows == false && cols == false) 
             {
                 return true; //then there aren't any merges , so should game over
@@ -134,26 +144,31 @@ namespace _2048.BisnessLogic
             return false; // if return false then the game continues
         }
 
-        private static bool CheckColumns(int[,] matrix, int cols)
+        public static bool CheckColumns(int[,] matrix)
         {
-                for (int i = 0; i < 3; i++)
-                {
-                      if (matrix[i, cols] == matrix[i + 1, cols] && matrix[i, cols] != 0)
-                      {
+            for (int j = 0; j < 4; j++)
+            {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (matrix[i, j] == matrix[i + 1, j] && matrix[i, j] != 0)
+                        {
                             return true;
-                      }
-                }
-                return false;
+                        }
+                    }
+            }
+            return false;
         }
 
-        private static bool CheckRows(int[,] matrix, int row)
+        private static bool CheckRows(int[,] matrix)
         {
-            
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 4; i++)
                 {
-                    if (matrix[row, i] == matrix[row, i + 1] && matrix[row, i] != 0)
+                    for (int j = 0; j < 3; j++)
                     {
-                        return true;
+                        if (matrix[i, j] == matrix[i, j + 1] && matrix[i, j] != 0)
+                        {
+                            return true;
+                        }
                     }
                 } 
                 return false;
@@ -198,11 +213,6 @@ namespace _2048.BisnessLogic
                 }
             }
             
-            if(BoardUnchanged(copyMatrix, matrix))
-            {
-                return iScore;
-            }
-
             if (!CheckEmptySlots(matrix))
             {
                 return iScore;
@@ -217,10 +227,13 @@ namespace _2048.BisnessLogic
             {
                 return iScore;
             }
-
+            if (BoardUnchanged(copyMatrix, matrix))
+            {
+                return iScore;
+            }
             PutNewNumberOnBoard(matrix);
             
-            //score += iScore;
+            
             return iScore;
         }
 
@@ -264,10 +277,7 @@ namespace _2048.BisnessLogic
                     }
                 }
             }
-            if (BoardUnchanged(copyMatrix, matrix))
-            {
-                return iScore;
-            }
+            
 
             if (!CheckEmptySlots(matrix))
             {
@@ -283,10 +293,14 @@ namespace _2048.BisnessLogic
             {
                 return iScore;
             }
+            if (BoardUnchanged(copyMatrix, matrix))
+            {
+                return iScore;
+            }
 
             PutNewNumberOnBoard(matrix);
             
-            //score += iScore;
+           
             return iScore;
         }
 
@@ -328,10 +342,7 @@ namespace _2048.BisnessLogic
                     }
                 }
             }
-            if (BoardUnchanged(copyMatrix, matrix))
-            {
-                return iScore;
-            }
+            
 
             if (!CheckEmptySlots(matrix))
             {
@@ -347,10 +358,13 @@ namespace _2048.BisnessLogic
             {
                 return iScore;
             }
-
+            if (BoardUnchanged(copyMatrix, matrix))
+            {
+                return iScore;
+            }
             PutNewNumberOnBoard(matrix);
            
-            //score += iScore;
+            
             return iScore;
         }
 
@@ -392,10 +406,7 @@ namespace _2048.BisnessLogic
                     }
                 }
             }
-            if (BoardUnchanged(copyMatrix, matrix))
-            {
-                return iScore;
-            }
+            
 
             if (!CheckEmptySlots(matrix))
             {
@@ -411,10 +422,14 @@ namespace _2048.BisnessLogic
             {
                 return iScore;
             }
+            if (BoardUnchanged(copyMatrix, matrix))
+            {
+                return iScore;
+            }
 
             PutNewNumberOnBoard(matrix);
             
-            //score += iScore;
+            
             return iScore;
         }
     }

@@ -37,9 +37,7 @@ namespace Tests
                 { 0, 0, 0, 0 }
             };
             int result = Logic.MoveUp(myMatrix);
-            
-
-            CollectionAssert.AreEqual(myMatrix, actualMatrix);
+            Assert.AreEqual(result, 4);
 
         }
 
@@ -60,11 +58,11 @@ namespace Tests
                 { 0, 2, 4, 0 }, 
                 { 4, 4, 4, 4 }
             };
-            int result = Logic.MoveDown(myMatrix);
-            
-            
-            CollectionAssert.AreEqual(myMatrix, actualMatrix);
+            int result = Logic.MoveDown(myMatrix);//here are the scores from the merges
 
+
+            //CollectionAssert.AreEqual(myMatrix, actualMatrix);
+            Assert.AreEqual(result, 8);
         }
 
     }

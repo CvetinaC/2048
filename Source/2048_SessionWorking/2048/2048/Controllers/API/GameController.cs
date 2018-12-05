@@ -33,26 +33,35 @@ namespace _2048.Controllers.API
 
             matrix = (int[,])HttpContext.Current.Session["Matrix"];
             score= (int)HttpContext.Current.Session["Score"];
+            //GameVM game = new GameVM();
+            //game.Matrix = matrix;
+            //game.Score = score;
+            //game.hasBeenWon = false;
+            //game.isGameOver = false;
+            //if (score > 2048 || score == 2048)
+            //{
+            //    game.hasBeenWon = true;
+            //}
+            //else if (Logic.CheckEmptySlots(matrix) != true && Logic.CheckGameOver() == true)
+            //{
+            //    game.isGameOver = true;
+            //}
 
 
             //matrix[0, 0] = id;
             switch (id)
             {
                 case 1:
-                    Logic.MoveUp(matrix);
-                    score += Logic.score;
+                    score += Logic.MoveUp(matrix);
                     break;
                 case 2:
-                    Logic.MoveRight(matrix);
-                    score += Logic.score;
+                    score += Logic.MoveRight(matrix);
                     break;
                 case 3:
-                    Logic.MoveDown(matrix);
-                    score += Logic.score;
+                    score += Logic.MoveDown(matrix);
                     break;
                 case 4:
-                    Logic.MoveLeft(matrix);
-                    score += Logic.score;
+                    score += Logic.MoveLeft(matrix);
                     break;
                 default:
                     break;
