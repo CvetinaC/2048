@@ -71,8 +71,8 @@ a:hover {
 }
 
 h1 {
-  margin: 0.67em 0;
-  font-size: 2em;
+    margin: 0.67em 0;
+    font-size: 46px !important;
 }
 
 abbr[title] {
@@ -763,7 +763,7 @@ pre code {
   margin-left: auto;
 }
 
-.container:before,
+
 .container:after {
   display: table;
   content: " ";
@@ -773,7 +773,7 @@ pre code {
   clear: both;
 }
 
-.container:before,
+
 .container:after {
   display: table;
   content: " ";

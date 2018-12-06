@@ -5,9 +5,10 @@
     margin: 30px 0;
     margin-top: 0px;
     position: relative;
+    overflow:no-content;
 }
-.container {
-    width: 550px;
+.myContainer {
+    width: 639px !important;
     margin: 0 auto;
 }
 .game-container {
@@ -43,4 +44,17 @@
     color: white;
     font-size: 50px;
 }
-
+.myButton {
+    background-color: burlywood;
+    border: none;
+    color: black;
+    padding: 14px;
+    width: 120px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 32px;
+}

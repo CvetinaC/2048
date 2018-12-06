@@ -1,5 +1,5 @@
 ﻿(function () {
-    document.addEventListener("keyup", keyUp, false);
+    document.addEventListener("keyup", keyUp, false); // attach keyup event to the document
     function keyUp(e) {
         var keyCode = e.keyCode;
         if (keyCode == 38) {
@@ -19,7 +19,6 @@
             //alert("Left");
         }
 
-       // ChangeScore();
     }
 
 
@@ -27,10 +26,10 @@
         var xmlhttp = null;
 
         if (window.XMLHttpRequest) {
-            xmlhttp = new window.XMLHttpRequest();
+            xmlhttp = new window.XMLHttpRequest(); //to interact with server
         }
         else if (window.ActiveXObject) {
-            xmlhttp = new window.ActiveXObject("Microsoft.XMLHTTP");
+            xmlhttp = new window.ActiveXObject("Microsoft.XMLHTTP");//for older versions,that don't support xmlhttpobject
         }
         else {
             alert("I'm sorry ! Your browser does not support XHR");
@@ -45,8 +44,6 @@
                 var responseXML = xmlhttp.responseXML;
                 var game = JSON.parse(responseText);
                 var matrix = game.Matrix;
-                //var element = document.getElementById("cell_0_0");
-                //element.innerHTML = matrix[0][0];
 
                 
                 for (var i = 0; i < 4; i++) {

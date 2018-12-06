@@ -10,7 +10,6 @@ namespace _2048.BisnessLogic
     {
         public static Random rand = new Random();
         public static int[,] matrix = new int[4, 4];
-        public static int score = 0;
         public static int maxResult = 0;
 
         public static int[,] InitializeMatrix()
